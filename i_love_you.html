@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>เซอร์ไพรส์สำหรับคนพิเศษ อ๋อมแอ๋ม 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root{
+      --pink:#ffe1ec;
+      --soft:#ffe3ec;
+      --dark:#333;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color:var(--dark);
+      overflow-x:hidden;
+    }
+    /* ===== Intro (Password) ===== */
+    .intro{
+      position:fixed; inset:0; z-index:50;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+    .intro-card{
+      background:#fff; padding:30px; border-radius:24px;
+      box-shadow:0 20px 40px rgba(0,0,0,.25);
+      text-align:center; max-width:360px; width:90%;
+    }
+    .intro-card h2{margin-top:0}
+    .intro-card input{
+      width:100%; padding:12px; border-radius:12px;
+      border:1px solid #ddd; font-size:1rem; margin:10px 0;
+    }
+    .btn{
+      border:none; padding:12px 20px; border-radius:999px;
+      background:var(--pink); color:#fff; font-size:1rem;
+      cursor:pointer; box-shadow:0 10px 20px rgba(0,0,0,.2);
+    }
+    .btn:active{transform:scale(.98)}
+
+    /* ===== Header ===== */
+    header{
+      padding:80px 20px 60px; text-align:center;
+      animation: fadeUp 1.2s ease both;
+    }
+    h1{font-size:clamp(2rem,6vw,3.2rem); margin-bottom:10px}
+    header p{font-size:1.2rem}
+
+    /* ===== Floating Hearts ===== */
+    .heart{position:fixed; bottom:-40px; font-size:24px; animation: float 8s linear infinite; opacity:.8}
+    @keyframes float{
+      from{transform:translateY(0) translateX(0); opacity:0}
+      10%{opacity:.9}
+      to{transform:translateY(-110vh) translateX(60px); opacity:0}
+    }
+
+    /* ===== Gallery ===== */
+    .gallery{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px; padding:40px;
+    }
+    .card{
+      background:#fff; border-radius:22px; overflow:hidden;
+      box-shadow:0 15px 30px rgba(0,0,0,.2);
+      transition:.4s; cursor:pointer;
+    }
+    .card:hover{transform:translateY(-8px)}
+    .card img{width:100%; height:200px; object-fit:cover}
+    .card .cap{padding:15px}
+
+    /* ===== Lightbox ===== */
+    .lightbox{
+      position:fixed; inset:0; background:rgba(0,0,0,.8);
+      display:none; align-items:center; justify-content:center;
+      z-index:100;
+    }
+    .lightbox img{
+      max-width:90%; max-height:90%; border-radius:20px;
+      box-shadow:0 20px 40px rgba(0,0,0,.5);
+    }
+    .lightbox span{
+      position:absolute; top:20px; right:30px;
+      font-size:2rem; color:#fff; cursor:pointer;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline-wrap{padding:20px 20px 60px}
+    .timeline{
+      max-width:900px; margin:auto; position:relative;
+    }
+    .timeline:before{
+      content:""; position:absolute; left:50%; top:0; bottom:0;
+      width:4px; background:var(--soft); transform:translateX(-50%);
+    }
+    .event{
+      width:50%; padding:20px; position:relative;
+      animation: fadeUp 1s ease both;
+    }
+    .event .box{
+      background:#fff; border-radius:18px; padding:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.2);
+    }
+    .event.left{left:0}
+    .event.right{left:50%}
+    .event:after{
+      content:"❤"; position:absolute; top:30px; right:-12px; font-size:20px
+    }
+    .event.right:after{left:-12px; right:auto}
+
+    /* ===== Message ===== */
+    .message{
+      background:#fff; margin:40px auto; padding:30px;
+      max-width:800px; border-radius:28px;
+      box-shadow:0 20px 40px rgba(0,0,0,.25);
+      line-height:1.8;
+    }
+
+    footer{text-align:center; padding:30px; opacity:.9}
+
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(30px)}
+      to{opacity:1; transform:none}
+    }
+
+    /* Responsive timeline */
+    @media(max-width:768px){
+      .timeline:before{left:20px}
+      .event{width:100%; padding-left:50px}
+      .event.right{left:0}
+      .event:after{left:12px; right:auto}
+    }
+
+    /* ===== Music Button ===== */
+    .music-btn{
+      position:fixed; bottom:20px; right:20px; z-index:200;
+      border:none; padding:12px 18px; border-radius:999px;
+      background:#fff; color:#333; font-size:1rem;
+      box-shadow:0 10px 20px rgba(0,0,0,.25);
+      cursor:pointer;
+    }
+    .music-btn:active{transform:scale(.96)}
+      .event{width:100%; padding-left:50px}
+      .event.right{left:0}
+      .event:after{left:12px; right:auto}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Background Music ===== -->
+<audio id="bgm" loop>
+  <source src="Sexski รู้ตัวอีกที Feat.2TFLOW Official MV [music].mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== Intro Password ===== -->
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <h2>สำหรับอ๋อมแอ๋มคนเดียว 💕</h2>
+    <p>พิมพ์ตัวเลขพิเศษของเรา</p>
+    <input id="pwd" placeholder="พิมพ์ตัวเลขพิเศษของเรา" />
+    <button class="btn" onclick="enterSite()">เข้าสู่รหัสผ่านเซอร์ไพรส์</button>
+    <p id="err" style="color:red;display:none">ยังไม่ถูกนะจ้ะอ๋อมแอ๋ม</p>
+  </div>
+</div>
+
+<header>
+  <h1>เซอร์ไพรส์สำหรับที่อยู่กันมา 𝟛𝕐𝟚𝕄 💖</h1>
+  <p>เว็บนี้ทำมาเพื่อเธอคนเดียวเลย คุณนภสร เหล่าทัย</p>
+</header>
+
+<!-- Music Control Button -->
+<button id="musicBtn" class="music-btn" onclick="toggleMusic()">🔊 เปิดเพลง</button>
+
+<section class="gallery">
+  <div class="card">
+    <img src="1.jpg" />
+    <div class="cap">รอยยิ้มของเราทั้งสองคน</div>
+  </div>
+  <div class="card">
+    <img src="2.jpg" />
+    <div class="cap">ความสุขอยู่ร่วมกัน</div>
+  </div>
+  <div class="card">
+    <img src="3.jpg" />
+    <div class="cap">มองดูวิวสวยงาม</div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span>✕</span>
+  <img id="lightboxImg" />
+</div>
+
+<section class="timeline-wrap">
+  <h2 style="text-align:center">ไทม์ไลน์ของเรา 💞</h2>
+  <div class="timeline">
+    <div class="event left">
+      <div class="box"><b>วันแรกที่คบกัน</b><br>ดีใจที่จะได้ใช้ชีวิตร่วมกัน</div>
+    </div>
+    <div class="event right">
+      <div class="box"><b>ช่วงที่ทะเลาะ</b><br>แต่ก็ไม่เคยคิดจะไปไหนแค่ไล่เฉยๆ55</div>
+    </div>
+    <div class="event left">
+      <div class="box"><b>วันนี้</b><br>รักมากกว่าเดิม และอยากอยู่ด้วยกันตลอดไป</div>
+    </div>
+  </div>
+</section>
+
+<div class="message">
+  <h2>ถึงอ๋อมแอ๋มของไอซ์ 💌</h2>
+  <p>
+    ขอบคุณที่เข้ามาเป็นรอยยิ้มถึงจะหน้าบูดบ้าง ก็เป็นความสุข
+    และเป็นทุกอย่างที่ทำให้แต่ละวันพิเศษขึ้น อยากขอให้อยู่กับไอซ์ไปนานๆ
+    ไม่ว่าเราจะเหนื่อยหรือท้อแค่ไหน ไอซ์ก็รักอ๋อมที่สุดในสามโลก
+    เราจะช่วยกันสร้างอนาคต เก็บเงิน ทำมาหากิน และไม่ปล่อยมือกันก่อน
+    ไอซ์สัญญาว่าจะรัก ดูแล และปกป้องอ๋อมตลอดไป ❤️
+  </p>
+</div>
+
+<footer>
+  ทำด้วยใจนะอ๋อม 💖 จากไอซ์ 𝕀♡𝔸
+</footer>
+
+<script>
+  // ===== Lightbox functions =====
+  document.querySelectorAll('.card img').forEach(img=>{
+    img.addEventListener('click',()=>openLightbox(img.src));
+  });
+  function openLightbox(src){
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').style.display='flex';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').style.display='none';
+  }
+
+
+  const PASSWORD = "29/21/091165"; // เปลี่ยนรหัสตรงนี้
+
+  function enterSite(){
+    const v = document.getElementById('pwd').value;
+    if(v === PASSWORD){
+      document.getElementById('intro').style.display='none';
+      document.getElementById('bgm').play();
+      document.getElementById('musicBtn').innerText='⏸ ปิดเพลง';
+      hearts();
+    }else{
+      document.getElementById('err').style.display='block';
+    }
+  }
+  
+
+  function hearts(){
+    setInterval(()=>{
+      const h=document.createElement('div');
+      h.className='heart';
+      h.innerText='💖';
+      h.style.left=Math.random()*100+'vw';
+      h.style.animationDuration=(6+Math.random()*4)+'s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),9000);
+    },600);
+  }
+let playing = true;
+  function toggleMusic(){
+    const bgm = document.getElementById('bgm');
+    const btn = document.getElementById('musicBtn');
+    if(playing){
+      bgm.pause();
+      btn.innerText = '🔊 เปิดเพลง';
+    }else{
+      bgm.play();
+      btn.innerText = '⏸ ปิดเพลง';
+    }
+    playing = !playing;
+  }
+</script>
+</body>
+</html>
